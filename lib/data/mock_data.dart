@@ -75,18 +75,18 @@ class MockData {
   ];
 
   static final animals = <Animal>[
-    const Animal(id: 'a1', name: 'Toplan', breed: 'Mixed', age: '2 years', gender: 'Male', location: 'Baku', healthStatus: 'Recovered', story: 'Toplan was rescued after an accident and now loves people.', images: ['https://picsum.photos/id/237/900/700', 'https://picsum.photos/id/238/900/700'], type: AnimalType.dog, shelterId: 's1'),
-    const Animal(id: 'a2', name: 'Mestan', breed: 'British Shorthair', age: '1 year', gender: 'Female', location: 'Ganja', healthStatus: 'Vaccinated', story: 'Mestan was found in rain and is now healthy.', images: ['https://picsum.photos/id/593/900/700', 'https://picsum.photos/id/219/900/700'], type: AnimalType.cat, shelterId: 's2'),
-    const Animal(id: 'a3', name: 'Duman', breed: 'Shepherd Mix', age: '3 years', gender: 'Male', location: 'Sumqayit', healthStatus: 'Needs dental care', story: 'Duman is calm and social, waiting for adoption.', images: ['https://picsum.photos/id/433/900/700'], type: AnimalType.dog, shelterId: 's3'),
-    const Animal(id: 'a4', name: 'Bulud', breed: 'Van Cat', age: '8 months', gender: 'Female', location: 'Baku', healthStatus: 'Good', story: 'Bulud is playful and loves soft blankets.', images: ['https://picsum.photos/id/1074/900/700'], type: AnimalType.cat, shelterId: 's1'),
-    const Animal(id: 'a5', name: 'Qaya', breed: 'Mixed', age: '4 years', gender: 'Male', location: 'Lankaran', healthStatus: 'Special diet', story: 'Qaya is gentle and needs regular nutritious meals.', images: ['https://picsum.photos/id/1062/900/700'], type: AnimalType.dog, shelterId: 's4'),
-    const Animal(id: 'a6', name: 'Minnoş', breed: 'Siamese Mix', age: '2 years', gender: 'Female', location: 'Mingachevir', healthStatus: 'Recovered', story: 'Minnoş survived cold winter nights and is now safe.', images: ['https://picsum.photos/id/1025/900/700'], type: AnimalType.cat, shelterId: 's5'),
-    const Animal(id: 'a7', name: 'Leo', breed: 'Labrador Mix', age: '5 years', gender: 'Male', location: 'Baku', healthStatus: 'Good', story: 'Leo helps calm younger puppies at the shelter.', images: ['https://picsum.photos/id/1024/900/700'], type: AnimalType.dog, shelterId: 's1'),
-    const Animal(id: 'a8', name: 'Şehriyar', breed: 'Tabby', age: '1.5 years', gender: 'Male', location: 'Ganja', healthStatus: 'Vaccinated', story: 'Şehriyar was rescued from a market area.', images: ['https://picsum.photos/id/582/900/700'], type: AnimalType.cat, shelterId: 's2'),
-    const Animal(id: 'a9', name: 'Narin', breed: 'Mixed', age: '6 months', gender: 'Female', location: 'Sumqayit', healthStatus: 'Under treatment', story: 'Narin needs follow-up care and monthly support.', images: ['https://picsum.photos/id/659/900/700'], type: AnimalType.dog, shelterId: 's3'),
-    const Animal(id: 'a10', name: 'Aylin', breed: 'Calico', age: '3 years', gender: 'Female', location: 'Lankaran', healthStatus: 'Good', story: 'Aylin loves children and social spaces.', images: ['https://picsum.photos/id/783/900/700'], type: AnimalType.cat, shelterId: 's4'),
-    const Animal(id: 'g1', name: 'Rex', breed: 'Street Mix', age: '2 years', gender: 'Male', location: 'Baku', healthStatus: 'Monthly checkups', story: 'Supported through distant guardianship program.', images: ['https://picsum.photos/id/169/900/700'], type: AnimalType.dog, guardianName: 'Aysel H.', monthlyFee: 55, guardianshipStatus: 'Active'),
-    const Animal(id: 'g2', name: 'Maviş', breed: 'Street Cat', age: '1 year', gender: 'Female', location: 'Sumqayit', healthStatus: 'Sterilized', story: 'Maviş receives regular food and care via donor.', images: ['https://picsum.photos/id/1020/900/700'], type: AnimalType.cat, guardianName: 'Elvin M.', monthlyFee: 45, guardianshipStatus: 'Active'),
+    const Animal(id: 'a1', name: 'Toplan', breed: 'Mixed', age: '2 years', gender: 'Male', location: 'Baku', healthStatus: 'Recovered', story: 'Toplan was rescued after an accident and now loves playing.', images: ['https://picsum.photos/id/237/800/600']),
+    const Animal(id: 'a2', name: 'Mestan', breed: 'British Shorthair', age: '1 year', gender: 'Female', location: 'Ganja', healthStatus: 'Vaccinated', story: 'Mestan was found in rain and is now healthy.', images: ['https://picsum.photos/id/593/800/600']),
+    const Animal(id: 'a3', name: 'Duman', breed: 'Shepherd Mix', age: '3 years', gender: 'Male', location: 'Sumqayit', healthStatus: 'Needs dental care', story: 'Duman is calm and social, waiting for a home.', images: ['https://picsum.photos/id/1025/800/600']),
+    const Animal(id: 'a4', name: 'Bulud', breed: 'Van Cat', age: '8 months', gender: 'Female', location: 'Baku', healthStatus: 'Good', story: 'Bulud is playful and loves soft blankets.', images: ['https://picsum.photos/id/1062/800/600']),
+    const Animal(id: 'a5', name: 'Qaya', breed: 'Mixed', age: '4 years', gender: 'Male', location: 'Lankaran', healthStatus: 'Special diet', story: 'Qaya is gentle and needs regular nutritious meals.', images: ['https://picsum.photos/id/433/800/600']),
+    const Animal(id: 'a6', name: 'Minnos', breed: 'Siamese Mix', age: '2 years', gender: 'Female', location: 'Mingachevir', healthStatus: 'Recovered', story: 'Minnos survived cold winter nights and is now safe.', images: ['https://picsum.photos/id/219/800/600']),
+    const Animal(id: 'a7', name: 'Leo', breed: 'Labrador Mix', age: '5 years', gender: 'Male', location: 'Baku', healthStatus: 'Good', story: 'Leo helps calm younger puppies at the shelter.', images: ['https://picsum.photos/id/1003/800/600']),
+    const Animal(id: 'a8', name: 'Sehriyar', breed: 'Tabby', age: '1.5 years', gender: 'Male', location: 'Ganja', healthStatus: 'Vaccinated', story: 'Sehriyar was rescued from a market area.', images: ['https://picsum.photos/id/106/800/600']),
+    const Animal(id: 'a9', name: 'Narin', breed: 'Mixed', age: '6 months', gender: 'Female', location: 'Sumqayit', healthStatus: 'Under treatment', story: 'Narin needs follow-up care and monthly support.', images: ['https://picsum.photos/id/659/800/600']),
+    const Animal(id: 'a10', name: 'Aylin', breed: 'Calico', age: '3 years', gender: 'Female', location: 'Lankaran', healthStatus: 'Good', story: 'Aylin loves children and social spaces.', images: ['https://picsum.photos/id/718/800/600']),
+    const Animal(id: 'g1', name: 'Rex', breed: 'Street Mix', age: '2 years', gender: 'Male', location: 'Baku', healthStatus: 'Monthly checkups', story: 'Supported through distant guardianship program.', images: ['https://picsum.photos/id/783/800/600']),
+    const Animal(id: 'g2', name: 'Mavis', breed: 'Street Cat', age: '1 year', gender: 'Female', location: 'Sumqayit', healthStatus: 'Sterilized', story: 'Mavis receives regular food and care via guardians.', images: ['https://picsum.photos/id/1020/800/600']),
   ];
 
   static final posts = List.generate(
@@ -96,7 +96,7 @@ class MockData {
       author: i.isEven ? 'Baku Rescue Home' : 'Volunteer Nigar',
       avatar: stories[i % stories.length],
       description: i.isEven
-          ? 'Bu gün $i-ci xilas hekayəmiz: yardımınızla daha bir heyvan təhlükəsizdir. / Rescue update #$i thanks to your support.'
+          ? 'Bu gun $i-ci xilas hekayemiz: yardiminizla daha bir heyvan tehlukesizdir. / Rescue update #$i thanks to your support.'
           : 'Urgent care completed for puppy #$i. Every manat matters!',
       image: 'https://picsum.photos/id/${200 + i}/1200/900',
       likes: 120 + i * 8,
@@ -146,7 +146,7 @@ class MockData {
     {'title': 'Yearly Supporter', 'earned': false},
   ];
 
-  static const user = AppUser(
+  static final user = AppUser(
     name: 'Orxan Hummatov',
     avatar: 'https://picsum.photos/id/1005/300/300',
     memberSince: DateTime(2024, 2, 10),

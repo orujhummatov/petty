@@ -1,0 +1,26 @@
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+.pub/
+build/
+
+# Flutter generated
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# iOS/Android
+**/Pods/
+**/DerivedData/
+android/.gradle/
+android/local.properties
+
+# Misc
+*.log
+*.tmp
+.DS_Store

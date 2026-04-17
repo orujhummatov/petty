@@ -18,6 +18,7 @@ class FundScreen extends ConsumerWidget {
     final totalDonated = donations.fold<double>(0, (a, b) => a + b.amount);
     final totalSpent = expenses.fold<double>(0, (a, b) => a + b.amount);
     final formatter = NumberFormat.currency(symbol: '₼', decimalDigits: 0);
+    final tabHeight = (MediaQuery.sizeOf(context).height * 0.55).clamp(320.0, 700.0);
 
     return DefaultTabController(
       length: 2,
@@ -64,9 +65,9 @@ class FundScreen extends ConsumerWidget {
                 _summaryCard(context, 'Animals Helped', '137'),
               ],
             ),
-            const SizedBox(
-              height: 560,
-              child: TabBarView(
+            SizedBox(
+              height: tabHeight,
+              child: const TabBarView(
                 children: [_DonationsTab(), _ExpensesTab()],
               ),
             ),

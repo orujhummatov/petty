@@ -22,7 +22,16 @@ class ShelterDetailScreen extends ConsumerWidget {
         children: [
           NetworkImageCard(url: shelter.coverPhoto),
           const SizedBox(height: 12),
-          Wrap(spacing: 8, children: shelter.gallery.map((g) => SizedBox(width: 160, child: NetworkImageCard(url: g, height: 110))).toList()),
+          SizedBox(
+            height: 120,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: shelter.gallery.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              itemBuilder: (_, index) =>
+                  SizedBox(width: 160, child: NetworkImageCard(url: shelter.gallery[index], height: 110)),
+            ),
+          ),
           const SizedBox(height: 12),
           const Card(
             child: ListTile(

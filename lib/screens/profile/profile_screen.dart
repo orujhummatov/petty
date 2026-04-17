@@ -98,7 +98,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           ListTile(
             title: const Text('Language'),
-            subtitle: Text(language == AppLanguage.az ? 'AZ' : 'EN'),
+            subtitle: Text(language == AppLanguage.az ? 'Azərbaycan dili' : 'English language'),
             trailing: SegmentedButton<AppLanguage>(
               segments: const [
                 ButtonSegment(value: AppLanguage.az, label: Text('AZ')),

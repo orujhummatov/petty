@@ -105,8 +105,8 @@ class _GuardianshipTab extends ConsumerWidget {
           onPressed: () => showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (_) => Padding(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            builder: (sheetContext) => Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(sheetContext).bottom),
               child: const _SubmitAnimalSheet(),
             ),
           ),

@@ -17,7 +17,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Petty Feed')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Create post coming soon')), 
+          const SnackBar(content: Text('Create post Coming Soon')),
         ),
         icon: const Icon(Icons.add),
         label: const Text('Create Post'),

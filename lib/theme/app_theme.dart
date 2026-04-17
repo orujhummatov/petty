@@ -21,7 +21,7 @@ class AppTheme {
       textTheme: GoogleFonts.interTextTheme(),
       scaffoldBackgroundColor:
           brightness == Brightness.light ? Colors.white : const Color(0xFF0F172A),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         margin: const EdgeInsets.symmetric(vertical: 8),
         elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

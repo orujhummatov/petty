@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../providers/fund_provider.dart';
@@ -19,12 +20,17 @@ class ProfileScreen extends ConsumerWidget {
     final donations = ref.watch(donationsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: const Text('Profile')), 
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           ListTile(
-            leading: CircleAvatar(radius: 28, backgroundImage: NetworkImage(user.avatar)),
+            leading: CircleAvatar(
+              radius: 28,
+              backgroundImage: NetworkImage(user.avatar),
+              onBackgroundImageError: (_, __) {},
+              child: const Icon(Icons.person),
+            ),
             title: Text(user.name),
             subtitle: Text('Member since ${DateFormat('MMMM yyyy').format(user.memberSince)}'),
           ),
@@ -45,7 +51,10 @@ class ProfileScreen extends ConsumerWidget {
             child: ListTile(
               title: const Text('Donation Summary'),
               subtitle: Text('Monthly subscription: ₼${user.subscription.toStringAsFixed(0)}'),
-              trailing: OutlinedButton(onPressed: () {}, child: const Text('Change Subscription')),
+              trailing: OutlinedButton(
+                onPressed: () => context.go('/profile/subscription'),
+                child: const Text('Change'),
+              ),
             ),
           ),
           Card(
@@ -76,7 +85,7 @@ class ProfileScreen extends ConsumerWidget {
           Text('Leaderboard (Top 5)', style: Theme.of(context).textTheme.titleMedium),
           ...leaderboard.take(5).toList().asMap().entries.map(
                 (e) => ListTile(
-                  leading: CircleAvatar(child: Text('#${e.key + 1}')),
+                  leading: CircleAvatar(child: Text('#${e.key + 1}')), 
                   title: Text(e.value['name'].toString()),
                   trailing: Text('${e.value['xp']} XP'),
                 ),
@@ -101,8 +110,8 @@ class ProfileScreen extends ConsumerWidget {
             subtitle: Text(language == AppLanguage.az ? 'Azərbaycan dili' : 'English language'),
             trailing: SegmentedButton<AppLanguage>(
               segments: const [
-                ButtonSegment(value: AppLanguage.az, label: Text('AZ')),
-                ButtonSegment(value: AppLanguage.en, label: Text('EN')),
+                ButtonSegment(value: AppLanguage.az, label: Text('AZ')), 
+                ButtonSegment(value: AppLanguage.en, label: Text('EN')), 
               ],
               selected: {language},
               onSelectionChanged: (v) => ref.read(languageProvider.notifier).state = v.first,

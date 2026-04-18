@@ -1,10 +1,9 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/mock_data.dart';
 import '../../providers/fund_provider.dart';
 
 class FundScreen extends ConsumerWidget {
@@ -14,7 +13,6 @@ class FundScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final donations = ref.watch(donationsProvider);
     final expenses = ref.watch(expensesProvider);
-    final strategy = ref.watch(spendingStrategyProvider);
     final totalDonated = donations.fold<double>(0, (a, b) => a + b.amount);
     final totalSpent = expenses.fold<double>(0, (a, b) => a + b.amount);
     final formatter = NumberFormat.currency(symbol: '₼', decimalDigits: 0);
@@ -24,40 +22,31 @@ class FundScreen extends ConsumerWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(title: const Text('Fund / Kassa'), bottom: const TabBar(tabs: [Tab(text: 'Incoming Donations'), Tab(text: 'Expenses')])),
-        floatingActionButton: FloatingActionButton.extended(onPressed: () {}, icon: const Icon(Icons.volunteer_activism), label: const Text('Donate Now')),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => context.go('/fund/donate'),
+          icon: const Icon(Icons.volunteer_activism),
+          label: const Text('Donate Now'),
+        ),
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Card(
-              child: ListTile(
-                title: const Text('Current Fund Balance'),
-                subtitle: Text(formatter.format(totalDonated - totalSpent), style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    const Icon(Icons.account_balance_wallet, size: 48, color: Color(0xFF1565C0)),
+                    const SizedBox(height: 8),
+                    const Text('Total Funds Raised', style: TextStyle(color: Colors.grey)),
+                    const SizedBox(height: 4),
+                    Text(formatter.format(totalDonated), style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold, color: const Color(0xFF1565C0))),
+                    const SizedBox(height: 12),
+                    Text('Current Balance: ${formatter.format(totalDonated - totalSpent)}', style: Theme.of(context).textTheme.titleMedium),
+                  ],
+                ),
               ),
             ).animate().shimmer(duration: 1200.ms),
             const SizedBox(height: 8),
-            Card(
-              child: SizedBox(
-                height: 240,
-                child: PieChart(
-                  PieChartData(
-                    sections: strategy.entries
-                        .toList()
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => PieChartSectionData(
-                            value: e.value.value,
-                            title: '${e.value.key}\n${e.value.value.toInt()}%',
-                            color: MockData.strategyColors[e.key],
-                            radius: 78,
-                            titleStyle: const TextStyle(fontSize: 11, color: Colors.white),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ),
-            ),
             Row(
               children: [
                 _summaryCard(context, 'Total Donated', formatter.format(totalDonated)),
@@ -67,8 +56,8 @@ class FundScreen extends ConsumerWidget {
             ),
             SizedBox(
               height: tabHeight,
-              child: const TabBarView(
-                children: [_DonationsTab(), _ExpensesTab()],
+              child: TabBarView(
+                children: [const _DonationsTab(), _ExpensesTab()],
               ),
             ),
           ],
@@ -114,7 +103,17 @@ class _ExpensesTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final f = DateFormat('dd MMM yyyy');
     return ListView(
-      children: ref.watch(expensesProvider).map((e) => Card(child: ListTile(leading: const Icon(Icons.receipt_long_outlined), title: Text(e.purpose), subtitle: Text('${e.category} • ${f.format(e.date)}'), trailing: TextButton(onPressed: () {}, child: const Text('View Proof'))))).toList(),
+      children: ref.watch(expensesProvider).map((e) => Card(
+        child: ListTile(
+          leading: const Icon(Icons.receipt_long_outlined),
+          title: Text(e.purpose),
+          subtitle: Text('${e.category} • ${f.format(e.date)}'),
+          trailing: TextButton(
+            onPressed: () => context.go('/fund/proof/${e.id}'),
+            child: const Text('View Proof'),
+          ),
+        ),
+      )).toList(),
     );
   }
 }

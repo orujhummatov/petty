@@ -4,48 +4,96 @@ import 'package:go_router/go_router.dart';
 
 import '../screens/animals/animal_detail_screen.dart';
 import '../screens/animals/animals_screen.dart';
+import '../screens/fund/donate_screen.dart';
+import '../screens/fund/expense_proof_screen.dart';
 import '../screens/fund/fund_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/profile/profile_screen.dart';
+import '../screens/profile/subscription_screen.dart';
 import '../screens/shelters/shelter_detail_screen.dart';
 import '../screens/shelters/shelters_screen.dart';
 import '../screens/splash/splash_screen.dart';
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
+    navigatorKey: _rootNavigatorKey,
     initialLocation: '/splash',
     routes: [
       GoRoute(path: '/splash', builder: (_, __) => const SplashScreen()),
-      GoRoute(path: '/', builder: (_, __) => const MainShell(index: 0)),
-      GoRoute(path: '/shelters', builder: (_, __) => const MainShell(index: 1)),
-      GoRoute(path: '/fund', builder: (_, __) => const MainShell(index: 2)),
-      GoRoute(path: '/animals', builder: (_, __) => const MainShell(index: 3)),
-      GoRoute(path: '/profile', builder: (_, __) => const MainShell(index: 4)),
-      GoRoute(path: '/shelters/:id', builder: (_, state) => ShelterDetailScreen(id: state.pathParameters['id']!)),
-      GoRoute(path: '/animals/:id', builder: (_, state) => AnimalDetailScreen(id: state.pathParameters['id']!)),
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) => MainShell(child: child),
+        routes: [
+          GoRoute(path: '/', builder: (_, __) => const HomeScreen()),
+          GoRoute(
+            path: '/shelters',
+            builder: (_, __) => const SheltersScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (_, state) => ShelterDetailScreen(id: state.pathParameters['id']!),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: '/fund',
+            builder: (_, __) => const FundScreen(),
+            routes: [
+              GoRoute(
+                path: 'donate',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (_, __) => const DonateScreen(),
+              ),
+              GoRoute(
+                path: 'proof/:id',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (_, state) => ExpenseProofScreen(expenseId: state.pathParameters['id']!),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: '/animals',
+            builder: (_, __) => const AnimalsScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (_, state) => AnimalDetailScreen(id: state.pathParameters['id']!),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: '/profile',
+            builder: (_, __) => const ProfileScreen(),
+            routes: [
+              GoRoute(
+                path: 'subscription',
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (_, __) => const SubscriptionScreen(),
+              ),
+            ],
+          ),
+        ],
+      ),
     ],
   );
 });
 
 class MainShell extends StatelessWidget {
-  const MainShell({super.key, required this.index});
+  const MainShell({super.key, required this.child});
 
-  final int index;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final pages = [
-      const HomeScreen(),
-      const SheltersScreen(),
-      const FundScreen(),
-      const AnimalsScreen(),
-      const ProfileScreen(),
-    ];
-
     return Scaffold(
-      body: pages[index],
+      body: child,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: index,
+        selectedIndex: _calculateSelectedIndex(context),
         onDestinationSelected: (value) {
           const routes = ['/', '/shelters', '/fund', '/animals', '/profile'];
           context.go(routes[value]);
@@ -59,5 +107,14 @@ class MainShell extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  int _calculateSelectedIndex(BuildContext context) {
+    final location = GoRouterState.of(context).uri.toString();
+    if (location.startsWith('/profile')) return 4;
+    if (location.startsWith('/animals')) return 3;
+    if (location.startsWith('/fund')) return 2;
+    if (location.startsWith('/shelters')) return 1;
+    return 0;
   }
 }
